@@ -4,10 +4,10 @@
 [![Maintenance status][status-badge]][status-url]
 [![Code coverage][coverage-badge]][coverage-url]
 
-<!-- [![Chrome Web Store version][store-version-badge]][store-version-url] -->
-<!-- [![Chrome Web Store rating][store-rating-badge]][store-rating-url] -->
-<!-- [![Chrome Web Store rating][store-stars-badge]][store-stars-url] -->
-<!-- [![Chrome Web Store users count][store-users-badge]][store-users-url] -->
+[![Chrome Web Store version][store-version-badge]][store-version-url]
+[![Chrome Web Store rating][store-rating-badge]][store-rating-url]
+[![Chrome Web Store rating][store-stars-badge]][store-stars-url]
+[![Chrome Web Store users count][store-users-badge]][store-users-url]
 
 ## About
 
@@ -23,9 +23,9 @@ Developed and tested on `Version 109.0.5414.119 (Official Build) (64-bit)`
 
 ## Installation
 
-<!-- **Chrome Web Store** -->
+**Chrome Web Store**
 
-<!-- Just go [here][store-version-url] and click "Add to Chrome" -->
+Just go [here][store-version-url] and click "Add to Chrome"
 
 **From sources**
 
@@ -75,14 +75,14 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 [coverage-url]: https://codecov.io/gh/vikian050194/click
 [coverage-badge]: https://img.shields.io/codecov/c/github/vikian050194/click
 
-[store-version-url]: https://chrome.google.com/webstore/detail/click/
-[store-version-badge]: https://img.shields.io/chrome-web-store/v/
+[store-version-url]: https://chrome.google.com/webstore/detail/click/kcodfghcjchlhlikckbcjohmaihbihdp
+[store-version-badge]: https://img.shields.io/chrome-web-store/v/kcodfghcjchlhlikckbcjohmaihbihdp
 
-[store-rating-url]: https://chrome.google.com/webstore/detail/click/
-[store-rating-badge]: https://img.shields.io/chrome-web-store/rating/
+[store-rating-url]: https://chrome.google.com/webstore/detail/click/kcodfghcjchlhlikckbcjohmaihbihdp
+[store-rating-badge]: https://img.shields.io/chrome-web-store/rating/kcodfghcjchlhlikckbcjohmaihbihdp
 
-[store-stars-url]: https://chrome.google.com/webstore/detail/click/
-[store-stars-badge]: https://img.shields.io/chrome-web-store/stars/
+[store-stars-url]: https://chrome.google.com/webstore/detail/click/kcodfghcjchlhlikckbcjohmaihbihdp
+[store-stars-badge]: https://img.shields.io/chrome-web-store/stars/kcodfghcjchlhlikckbcjohmaihbihdp
 
-[store-users-url]: https://chrome.google.com/webstore/detail/click/
-[store-users-badge]: https://img.shields.io/chrome-web-store/users/
+[store-users-url]: https://chrome.google.com/webstore/detail/click/kcodfghcjchlhlikckbcjohmaihbihdp
+[store-users-badge]: https://img.shields.io/chrome-web-store/users/kcodfghcjchlhlikckbcjohmaihbihdp
