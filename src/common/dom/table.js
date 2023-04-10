@@ -33,14 +33,27 @@ export const makeTable = (columns, collection) => {
         body.appendChild(row);
         for (const { key, editable } of columns) {
             if (editable) {
-                const input = makeInput();
-                input.value = item[key];
-                input.addEventListener("change", (e) => {
-                    item[key] = e.target.value;
-                });
-                const td = makeTd();
-                td.appendChild(input);
-                row.appendChild(td);
+                if(typeof(item[key]) === typeof(true)){
+                    const type = "checkbox";
+                    const input = makeInput({type});
+                    input.checked = item[key];
+                    input.addEventListener("change", (e) => {
+                        item[key] = e.target.checked;
+                    });
+                    const td = makeTd();
+                    td.appendChild(input);
+                    row.appendChild(td);
+                } else {
+                    const type = "text";
+                    const input = makeInput({type});
+                    input.value = item[key];
+                    input.addEventListener("change", (e) => {
+                        item[key] = e.target.value;
+                    });
+                    const td = makeTd();
+                    td.appendChild(input);
+                    row.appendChild(td);
+                }
             } else {
                 const td = makeTd({ text: item[key] });
                 row.appendChild(td);

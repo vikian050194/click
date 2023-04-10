@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         new dom.Column("id", "#", false),
         new dom.Column("name", "name", true),
         new dom.Column("pattern", "pattern", true),
-        new dom.Column("selector", "selector", true)
+        new dom.Column("selector", "selector", true),
+        new dom.Column("isActive", "active", true)
     ];
 
     const $table = dom.makeTable(columns, rows);
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const $createButton = document.getElementById("create");
     $createButton.addEventListener("click", async () => {
-        rows.push(new Target(newId, `target#${newId}`, ".*", "button"));
+        rows.push(new Target(newId, `target#${newId}`, ".*", "button", true));
         await Local.set(TARGETS.TARGETS, rows);
         location.reload();
     });

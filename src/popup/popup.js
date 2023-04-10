@@ -41,6 +41,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 let isTargetMatched = false;
 
                 for (const target of targets) {
+                    if (target.isActive === false) {
+                        continue;
+                    }
+
                     if (match(tab.url, target.pattern)) {
                         const injectionResults = await chrome.scripting
                             .executeScript({

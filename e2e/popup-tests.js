@@ -61,5 +61,28 @@ test.describe("Popup", () => {
             // Assert
             await expect(pom.message).toHaveText("URL is not matched");
         });
+
+        test("Target is inactive", async ({ page, extensionId }) => {
+            // Arrange
+            const targets = new TargetsPage(page, extensionId);
+            await targets.goto();
+
+            await targets.create();
+            const row = targets.getRowPom(1);
+            await row.name.setValue("first click target");
+            await row.pattern.setValue("popup.html");
+            await row.selector.setValue("#message");
+            await row.isActive.click();
+            await targets.save();
+
+            const pom = new PopupPage(page, extensionId);
+            await pom.goto();
+
+            // Act
+            await pom.enter();
+
+            // Assert
+            await expect(pom.message).toHaveText("URL is not matched");
+        });
     });
 });
