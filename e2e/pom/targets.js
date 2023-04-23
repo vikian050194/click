@@ -53,6 +53,25 @@ class CheckboxOption extends BasePOM {
     }
 }
 
+class ButtonAction extends BasePOM {
+    /**
+     * @param {import('@playwright/test').Page} page
+     */
+    constructor(page) {
+        super(page);
+
+        this.locator = page.locator("input");
+    }
+
+    async click() {
+        await this.locator.click();
+    }
+
+    async hasValue(value) {
+        await this.expect(this.locator).toHaveValue(value);
+    }
+}
+
 export class TargetRow extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
@@ -65,6 +84,7 @@ export class TargetRow extends BasePOM {
         this.pattern = new InputOption(page.locator("td").nth(2));
         this.selector = new InputOption(page.locator("td").nth(3));
         this.isActive = new CheckboxOption(page.locator("td").nth(4));
+        this.delete = new ButtonAction(page.locator("td").nth(5));
     }
 }
 

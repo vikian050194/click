@@ -11,12 +11,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const rows = await Local.get(TARGETS.TARGETS);
     const newId = rows.reduce((max, { id }) => max < id ? id : max, 0) + 1;
 
+    const onDelete = async (id) => {
+        const remainingRows = rows.filter(r => r.id !== id);
+        await Local.set(TARGETS.TARGETS, remainingRows);
+        location.reload();
+    };
+
     const columns = [
-        new dom.Column("id", "#", false),
-        new dom.Column("name", "name", true),
-        new dom.Column("pattern", "pattern", true),
-        new dom.Column("selector", "selector", true),
-        new dom.Column("isActive", "active", true)
+        new dom.DataColumn("#", "id", false),
+        new dom.DataColumn("name", "name", true),
+        new dom.DataColumn("pattern", "pattern", true),
+        new dom.DataColumn("selector", "selector", true),
+        new dom.DataColumn("active", "isActive", true),
+        new dom.ActionColumn("delete", "X", onDelete)
     ];
 
     const $table = dom.makeTable(columns, rows);

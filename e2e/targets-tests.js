@@ -127,5 +127,17 @@ test.describe("Targets", () => {
                 await row.isActive.isChecked(true);
             }
         });
+
+        test("Delete one target", async ({ page }) => {
+            // Arrange
+            const pom = new TargetsPage(page);
+
+            // Act
+            await pom.create();
+            await pom.getRowPom(1).delete.click();
+
+            // Assert
+            await pom.empty();
+        });
     });
 });
