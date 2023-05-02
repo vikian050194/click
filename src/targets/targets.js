@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         new dom.DataColumn("pattern", "pattern", true),
         new dom.DataColumn("selector", "selector", true),
         new dom.DataColumn("active", "isActive", true),
+        new dom.DataColumn("auto", "isAuto", true),
         new dom.ActionColumn("delete", "X", onDelete)
     ];
 
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const $createButton = document.getElementById("create");
     $createButton.addEventListener("click", async () => {
-        rows.push(new Target(newId, `target#${newId}`, ".*", "button", true));
+        rows.push(new Target(newId, `target#${newId}`, ".*", "button", true, false));
         await Local.set(TARGETS.TARGETS, rows);
         location.reload();
     });

@@ -15,7 +15,7 @@
 
 ## Motivation
 
-It's my third Chrome extension. And it would not be nice to mix responsibilities and add such functionality into [warp][warp-url] and [track][track-url].
+It's my third Chrome extension. And it would not be nice to mix responsibilities and add such functionality into [warp][warp-url] and [track][track-url]. You can take a look at [list of questions and problems](./QA.md) that I faced during development.
 
 ## Requirements
 

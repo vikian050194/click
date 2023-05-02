@@ -84,7 +84,8 @@ export class TargetRow extends BasePOM {
         this.pattern = new InputOption(page.locator("td").nth(2));
         this.selector = new InputOption(page.locator("td").nth(3));
         this.isActive = new CheckboxOption(page.locator("td").nth(4));
-        this.delete = new ButtonAction(page.locator("td").nth(5));
+        this.isAuto = new CheckboxOption(page.locator("td").nth(5));
+        this.delete = new ButtonAction(page.locator("td").nth(6));
     }
 }
 

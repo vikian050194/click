@@ -41,17 +41,74 @@ test.describe("Options", () => {
         await expect(header).toHaveText("Options");
     });
 
-    test("Sections", async ({ page }) => {
+    test.describe("Tabs and pins", () => {
+        test("Pins", async ({ page }) => {
+            // Arrange
+            const pom = new OptionsPage(page);
+
+            // Assert
+            await expect(pom.getPin(1)).toHaveText("Execution");
+            await expect(pom.getPin(2)).toHaveText("Autoclose");
+        });
+
+        test("Tabs", async ({ page }) => {
+            // Arrange
+            const pom = new OptionsPage(page);
+
+            // Assert
+            await expect(pom.getTab(1).locator("h2")).toHaveText("Execution");
+            await expect(pom.getTab(2).locator("h2")).toHaveText("Popup autoclose");
+
+            for (let i = 1; i <= 2; i++) {
+                if (i === 1) {
+                    await expect(pom.getTab(i)).toBeVisible();
+                } else {
+                    await expect(pom.getTab(i)).toBeHidden();
+                }
+            }
+        });
+
+        test("Tabs visibility", async ({ page }) => {
+            // Arrange
+            const pom = new OptionsPage(page);
+
+            // Assert
+            for (let i = 1; i <= 2; i++) {
+                await pom.getPin(i).click();
+                for (let j = 1; j <= 2; j++) {
+                    if (i === j) {
+                        await expect(pom.getTab(j)).toBeVisible();
+                    } else {
+                        await expect(pom.getTab(j)).toBeHidden();
+                    }
+                }
+            }
+        });
+    });
+
+    test("Section: Execution", async ({ page }) => {
         // Arrange
-        const sections = page.locator("h2");
+        const pom = new OptionsPage(page);
+
+        await pom.execution.automatic.isChecked(true);
+        await pom.execution.logging.isChecked(true);
+
+        // Act
+        await pom.execution.automatic.click();
+        await pom.execution.logging.click();
+
+        await pom.save();
+        await pom.reload();
 
         // Assert
-        await expect(sections.nth(0)).toHaveText("Popup autoclose");
+        await pom.execution.automatic.isChecked(false);
+        await pom.execution.logging.isChecked(false);
     });
 
     test("Section: Popup autoclose", async ({ page }) => {
         // Arrange
         const pom = new OptionsPage(page);
+        await pom.getPin(2).click();
 
         await pom.autoclose.enabled.isChecked(true);
         await pom.autoclose.time.hasValue("1");

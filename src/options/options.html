@@ -13,37 +13,69 @@
             <h1>Options</h1>
         </header>
         <main>
-            <h2>Popup autoclose</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Value</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Autoclose enabled</td>
-                        <td><input id="is-autoclose-enabled" type="checkbox"></td>
-                        <td><span>Is popup autoclose enabled</span></td>
-                    </tr>
-                    <tr>
-                        <td>Autoclose time</td>
-                        <td>
-                            <select id="autoclose-time">
-                                <option value="0">0 sec</option>
-                                <option value="1">1 sec</option>
-                                <option value="2">2 sec</option>
-                                <option value="3">3 sec</option>
-                                <option value="5">5 sec</option>
-                                <option value="10">10 sec</option>
-                            </select>
-                        </td>
-                        <td><span>Popup autoclose time in seconds</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="pins">
+                <button class="pin" pin-id="1">Execution</button>
+                <button class="pin" pin-id="2">Autoclose</button>
+            </div>
+            <div class="tabs">
+                <div class="tab" tab-id="1">
+                    <h2>Execution</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Automatic execution enabled</td>
+                                <td><input id="is-automatic-execution-enabled" type="checkbox"></td>
+                                <td><span>Automatic execution starts on activation</span></td>
+                            </tr>
+                            <tr>
+                                <td>Execution logging enabled</td>
+                                <td><input id="is-execution-logging-enabled" type="checkbox"></td>
+                                <td><span>Log execution to active page Console</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab" tab-id="2">
+                    <h2>Popup autoclose</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Autoclose enabled</td>
+                                <td><input id="is-autoclose-enabled" type="checkbox"></td>
+                                <td><span>Is popup autoclose enabled</span></td>
+                            </tr>
+                            <tr>
+                                <td>Autoclose time</td>
+                                <td>
+                                    <select id="autoclose-time">
+                                        <option value="0">0 sec</option>
+                                        <option value="1">1 sec</option>
+                                        <option value="2">2 sec</option>
+                                        <option value="3">3 sec</option>
+                                        <option value="5">5 sec</option>
+                                        <option value="10">10 sec</option>
+                                    </select>
+                                </td>
+                                <td><span>Popup autoclose time in seconds</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <button id="save" class="action">Save</button>
         </main>
         <footer>

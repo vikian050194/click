@@ -43,6 +43,18 @@ class SelectOption extends BasePOM {
     }
 }
 
+export class ExecutionOptions extends BasePOM {
+    /**
+     * @param {import('@playwright/test').Page} page
+     */
+    constructor(page) {
+        super(page);
+
+        this.automatic = new CheckboxOption(page, OPTIONS.IS_AUTOMATIC_EXECUTION_ENABLED);
+        this.logging = new CheckboxOption(page, OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
+    }
+}
+
 export class AutocloseOptions extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
@@ -62,9 +74,12 @@ export class OptionsPage extends BasePage {
     constructor(page, extensionId) {
         super(page, extensionId);
 
+        this.execution = new ExecutionOptions(page);
         this.autoclose = new AutocloseOptions(page);
 
         this.saveButton = page.locator("#save");
+        this.pins = page.locator("div.pins");
+        this.tabs = page.locator("div.tabs");
     }
 
     async goto() {
@@ -73,5 +88,13 @@ export class OptionsPage extends BasePage {
 
     async save() {
         await this.saveButton.click();
+    }
+
+    getPin(index) {
+        return this.pins.locator(`button[pin-id="${index}"]`);
+    }
+
+    getTab(index) {
+        return this.tabs.locator(`div[tab-id="${index}"]`);
     }
 }

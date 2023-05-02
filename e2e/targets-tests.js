@@ -64,6 +64,7 @@ test.describe("Targets", () => {
             await firstRow.pattern.hasValue(".*");
             await firstRow.selector.hasValue("button");
             await firstRow.isActive.isChecked(true);
+            await firstRow.isAuto.isChecked(false);
         });
 
         test("Unsaved changes", async ({ page }) => {
@@ -77,6 +78,7 @@ test.describe("Targets", () => {
             await firstRow.pattern.setValue("bar");
             await firstRow.selector.setValue("baz");
             await firstRow.isActive.click();
+            await firstRow.isAuto.click();
             await pom.reload();
 
             // Assert
@@ -85,6 +87,7 @@ test.describe("Targets", () => {
             await firstRow.pattern.hasValue(".*");
             await firstRow.selector.hasValue("button");
             await firstRow.isActive.isChecked(true);
+            await firstRow.isAuto.isChecked(false);
         });
 
         test("Saved changes", async ({ page }) => {
@@ -98,6 +101,7 @@ test.describe("Targets", () => {
             await firstRow.pattern.setValue("bar");
             await firstRow.selector.setValue("baz");
             await firstRow.isActive.click();
+            await firstRow.isAuto.click();
             await pom.save();
 
             // Assert
@@ -106,6 +110,7 @@ test.describe("Targets", () => {
             await firstRow.pattern.hasValue("bar");
             await firstRow.selector.hasValue("baz");
             await firstRow.isActive.isChecked(false);
+            await firstRow.isAuto.isChecked(true);
         });
 
         test("Three rows", async ({ page }) => {
@@ -125,6 +130,7 @@ test.describe("Targets", () => {
                 await row.pattern.hasValue(".*");
                 await row.selector.hasValue("button");
                 await row.isActive.isChecked(true);
+                await row.isAuto.isChecked(false);
             }
         });
 
