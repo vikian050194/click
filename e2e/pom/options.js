@@ -43,7 +43,7 @@ class SelectOption extends BasePOM {
     }
 }
 
-export class ExecutionOptions extends BasePOM {
+class ExecutionOptions extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
      */
@@ -55,7 +55,7 @@ export class ExecutionOptions extends BasePOM {
     }
 }
 
-export class AutocloseOptions extends BasePOM {
+class AutocloseOptions extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
      */

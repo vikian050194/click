@@ -72,7 +72,7 @@ class ButtonAction extends BasePOM {
     }
 }
 
-export class TargetRow extends BasePOM {
+class TargetRow extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
      */
