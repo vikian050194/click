@@ -3,40 +3,53 @@ import {
     Local,
     OPTIONS,
     TARGETS,
-    funcs
+    funcs,
+    dom
 } from "../common/index.js";
 import { match } from "../common/match.js";
 
-const makeDiv = (id, text = null, className = null) => {
-    const newElement = document.createElement("div");
-    newElement.id = id;
-    if (className) {
-        newElement.className = className;
-    }
-    if (text) {
-        const textContent = document.createTextNode(text);
-        newElement.appendChild(textContent);
-    }
-    return newElement;
-};
-
 document.addEventListener("DOMContentLoaded", async () => {
+    // Get options
     const isAutomaticEnabled = await Sync.get(OPTIONS.IS_AUTOMATIC_EXECUTION_ENABLED);
     const isLoggingEnabled = await Sync.get(OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
 
     const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
     const autocloseTimeSec = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
 
+    // Get data
     const targets = await Local.get(TARGETS.TARGETS);
 
+    // UI items
+    const queryPlaceholder = "...";
+
+    // UI builders
+    const makeDiv = dom.makeElementCreator("div");
+
+    const makeId = (id) => `opt-${id}`;
+
+    // DOM elements creating and updating
     const $root = document.getElementById("root");
-    const $message = makeDiv("message");
+    const $message = makeDiv({ id: "message" });
+    const $options = makeDiv({ id: "options" });
 
     $root.append($message);
-    $message.innerText = "...";
 
     const setMessage = (result) => $message.innerText = result;
+    setMessage(queryPlaceholder);
 
+    // Autoclose
+    let autocloseId = null;
+    const resetAutoclose = () => clearTimeout(autocloseId);
+
+    // Data
+    const manualTargets = [];
+    const autoTargets = [];
+
+    // Indexes
+    let currentOptionIndex = 0;
+    let maxOptionIndex = 0;
+
+    // Functions
     const executeScript = async (f, x, tabId) => await chrome.scripting
         .executeScript({
             target: { tabId, allFrames: false },
@@ -52,9 +65,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const test = async (x, tabId) => await executeScript(funcs.test, x, tabId);
     const click = async (x, tabId) => await executeScript(funcs.click, x, tabId);
 
+    // Matching
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const manualTargets = [];
-    const autoTargets = [];
 
     await log("\"click\" extension is activated", tab.id);
 
@@ -91,6 +103,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    const matchedTargets = [...autoTargets, ...manualTargets];
+    maxOptionIndex = matchedTargets.length - 1;
+
+    if (matchedTargets.length > 0) {
+        $root.append(document.createElement("hr"), $options);
+    }
+
+    // Render
+    const render = () => {
+        const elements = [];
+
+        for (let index = 0; index <= maxOptionIndex; index++) {
+            const option = matchedTargets[index];
+            const isSelected = index == currentOptionIndex;
+            const title = `#${option.id}:${option.name}`;
+            const className = isSelected ? "selected" : null;
+            elements.push(makeDiv({ id: makeId(index), innerHTML: title, className }));
+        }
+
+        while ($options.firstChild) {
+            $options.removeChild($options.firstChild);
+        }
+
+        $options.append(...elements);
+    };
+
+    render();
+
     if (isAutomaticEnabled) {
         await log("automatic execution", tab.id);
 
@@ -110,30 +150,37 @@ document.addEventListener("DOMContentLoaded", async () => {
             await log(`automatic execution is failed: ${autoTargets.length} matched targets`, tab.id);
         }
     } else {
+        setMessage(`${matchedTargets.length} matched targets`);
         await log("automatic execution is disabled", tab.id);
     }
-
-    const matchedTargets = [...autoTargets, ...manualTargets];
 
     document.addEventListener("keydown", async ({ key }) => {
         switch (key) {
             case "Enter": {
                 await log("manual execution", tab.id);
-                if (matchedTargets.length === 1) {
-                    const [target] = matchedTargets;
+                if (matchedTargets.length > 0) {
+                    const target = matchedTargets[currentOptionIndex];
                     await click(target.selector, tab.id);
                     setMessage(`${target.name}: successful click`);
                     await log(`target #${target.id}: successful click`, tab.id);
                 } else {
-                    setMessage(`${matchedTargets.length} matched targets`);
                     await log(`manual execution is failed: ${matchedTargets.length} matched targets`, tab.id);
                 }
-
                 if (isAutocloseEnabled) {
                     setTimeout(window.close, autocloseTimeSec * 1000);
                 }
                 break;
             }
+            case "ArrowUp":
+                resetAutoclose();
+                currentOptionIndex = currentOptionIndex > 0 ? currentOptionIndex - 1 : maxOptionIndex;
+                render();
+                break;
+            case "ArrowDown":
+                resetAutoclose();
+                currentOptionIndex = currentOptionIndex < maxOptionIndex ? currentOptionIndex + 1 : 0;
+                render();
+                break;
         }
     });
 });
