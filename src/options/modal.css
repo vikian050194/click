@@ -1,0 +1,30 @@
+.modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-bg {
+    position: absolute;
+    background: #FFFFFFC0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-container {
+    position: relative;
+    padding: 8px;
+    border: 1px dotted gray;
+}

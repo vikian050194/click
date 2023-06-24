@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2023-06-25
+
+### Added
+
+- Full options description available in modal popup box
+
+### Fixed
+
+- Show value of 0 seconds autoclose time
+
 ## [1.0.0] - 2023-05-26
 
 ### Added
@@ -42,7 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use regular expression for URL matching
 - Configure popup autoclosing and autoclosing time
 
-[Unreleased]: https://github.com/vikian050194/click/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/vikian050194/click/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/vikian050194/click/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/vikian050194/click/compare/v0.4.0...v1.0.0
 [0.4.0]: https://github.com/vikian050194/click/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/vikian050194/click/compare/v0.2.0...v0.3.0

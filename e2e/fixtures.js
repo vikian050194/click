@@ -40,3 +40,5 @@ export const test = base.extend({
 });
 
 export const expect = exp;
+
+export const timeout = 1000;
