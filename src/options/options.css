@@ -22,3 +22,8 @@
         opacity: 0;
     }
 }
+
+.info {
+    /* cursor: help; */
+    cursor: pointer;
+}
