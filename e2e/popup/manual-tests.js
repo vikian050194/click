@@ -14,7 +14,7 @@ test.describe("Manual", () => {
 
         await options.execution.automatic.click();
 
-        await options.getPin(2).click();
+        await options.getPin(3).click();
         await options.autoclose.enabled.click();
 
         await options.save();

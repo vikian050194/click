@@ -9,49 +9,53 @@ test.describe("Options", () => {
         await pom.goto();
     });
 
-    test.describe("Tabs and pins", () => {
-        test("Pins", async ({ page }) => {
-            // Arrange
-            const pom = new OptionsPage(page);
+    const COUNT = 3;
 
-            // Assert
-            await expect(pom.getPin(1)).toHaveText("Execution");
-            await expect(pom.getPin(2)).toHaveText("Autoclose");
-        });
+    test("Pins", async ({ page }) => {
+        // Arrange
+        const pom = new OptionsPage(page);
+        let index = 1;
 
-        test("Tabs", async ({ page }) => {
-            // Arrange
-            const pom = new OptionsPage(page);
+        // Assert
+        await expect(pom.getPin(index++)).toHaveText("Execution");
+        await expect(pom.getPin(index++)).toHaveText("Appearance");
+        await expect(pom.getPin(index++)).toHaveText("Autoclose");
+    });
 
-            // Assert
-            await expect(pom.getTab(1).locator("h2")).toHaveText("Execution");
-            await expect(pom.getTab(2).locator("h2")).toHaveText("Popup autoclose");
+    test("Tabs", async ({ page }) => {
+        // Arrange
+        const pom = new OptionsPage(page);
+        let index = 1;
 
-            for (let i = 1; i <= 2; i++) {
-                if (i === 1) {
-                    await expect(pom.getTab(i)).toBeVisible();
+        // Assert
+        await expect(pom.getTab(index++).locator("h2")).toHaveText("Execution");
+        await expect(pom.getTab(index++).locator("h2")).toHaveText("Appearance");
+        await expect(pom.getTab(index++).locator("h2")).toHaveText("Autoclose");
+
+        for (let i = 1; i <= COUNT; i++) {
+            if (i === 1) {
+                await expect(pom.getTab(i)).toBeVisible();
+            } else {
+                await expect(pom.getTab(i)).toBeHidden();
+            }
+        }
+    });
+
+    test("Tabs visibility", async ({ page }) => {
+        // Arrange
+        const pom = new OptionsPage(page);
+
+        // Assert
+        for (let i = 1; i <= COUNT; i++) {
+            await pom.getPin(i).click();
+            for (let j = 1; j <= COUNT; j++) {
+                if (i === j) {
+                    await expect(pom.getTab(j)).toBeVisible();
                 } else {
-                    await expect(pom.getTab(i)).toBeHidden();
+                    await expect(pom.getTab(j)).toBeHidden();
                 }
             }
-        });
-
-        test("Tabs visibility", async ({ page }) => {
-            // Arrange
-            const pom = new OptionsPage(page);
-
-            // Assert
-            for (let i = 1; i <= 2; i++) {
-                await pom.getPin(i).click();
-                for (let j = 1; j <= 2; j++) {
-                    if (i === j) {
-                        await expect(pom.getTab(j)).toBeVisible();
-                    } else {
-                        await expect(pom.getTab(j)).toBeHidden();
-                    }
-                }
-            }
-        });
+        }
     });
 
     test("Titles and descriptions", async ({ page }) => {
@@ -59,7 +63,7 @@ test.describe("Options", () => {
         const pom = new OptionsPage(page);
 
         // Assert
-        for (let i = 1; i <= 2; i++) {
+        for (let i = 1; i <= COUNT; i++) {
             await pom.getPin(i).click();
 
             const titles = await pom.getTab(i).locator("span.title").allInnerTexts();
@@ -82,7 +86,7 @@ test.describe("Options", () => {
         await modal.hidden();
 
         // Assert
-        for (let i = 1; i <= 2; i++) {
+        for (let i = 1; i <= COUNT; i++) {
             await pom.getPin(i).click();
 
             const icons = await pom.getTab(i).locator("span.info").all();

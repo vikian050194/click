@@ -12,7 +12,7 @@ test.describe("Selection", () => {
         const options = new OptionsPage(page, extensionId);
         await options.goto();
 
-        await options.getPin(2).click();
+        await options.getPin(3).click();
         await options.autoclose.enabled.click();
         await options.save();
 

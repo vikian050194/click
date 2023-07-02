@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isAutomaticEnabled = await Sync.get(OPTIONS.IS_AUTOMATIC_EXECUTION_ENABLED);
     const isLoggingEnabled = await Sync.get(OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
 
+    const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+
     const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
     const autocloseTimeSec = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
 
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const makeId = (id) => `opt-${id}`;
 
     // DOM elements creating and updating
+    const $rootElement = document.documentElement;
     const $root = document.getElementById("root");
     const $message = makeDiv({ id: "message" });
     const $options = makeDiv({ id: "options" });
@@ -109,6 +112,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (matchedTargets.length > 0) {
         $root.append(document.createElement("hr"), $options);
     }
+
+    $rootElement.style.setProperty("--selected-item-color", color);
 
     // Render
     const render = () => {

@@ -28,10 +28,10 @@ test.describe("Sections", () => {
         await pom.execution.logging.isChecked(false);
     });
 
-    test("Popup autoclose", async ({ page }) => {
+    test("Autoclose", async ({ page }) => {
         // Arrange
         const pom = new OptionsPage(page);
-        await pom.getPin(2).click();
+        await pom.getPin(3).click();
 
         await pom.autoclose.enabled.isChecked(true);
         await pom.autoclose.time.hasValue("1");

@@ -55,6 +55,17 @@ class ExecutionOptions extends BasePOM {
     }
 }
 
+export class UiOptions extends BasePOM {
+    /**
+     * @param {import('@playwright/test').Page} page
+     */
+    constructor(page) {
+        super(page);
+
+        this.selectedItemColor = new SelectOption(page, OPTIONS.UI_SELECTED_ITEM_COLOR);
+    }
+}
+
 class AutocloseOptions extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
@@ -116,6 +127,7 @@ export class OptionsPage extends BasePage {
         super(page, extensionId);
 
         this.execution = new ExecutionOptions(page);
+        this.ui = new UiOptions(page);
         this.autoclose = new AutocloseOptions(page);
 
         this.saveButton = page.locator("#save");

@@ -2,11 +2,14 @@ import {
     dom,
     Sync,
     OPTIONS,
+    COLORS,
     AUTOCLOSE
 } from "../common/index.js";
 import { descriptions } from "./description.js";
+import { getTranslation } from "./translation.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const $rootElement = document.documentElement;
     const $modal = document.getElementById("modal-one");
 
     const icon = "{ &#8505; }";
@@ -39,6 +42,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             openModal(optionId);
         });
     });
+
+    const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+    $rootElement.style.setProperty("--new", color);
 
     const makeOption = dom.makeElementCreator("option");
 
@@ -77,6 +83,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const $isLoggingEnabled = document.getElementById(OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
     $isLoggingEnabled.checked = await Sync.get(OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
 
+    // Appearance
+    const $selectedItemColor = document.getElementById(OPTIONS.UI_SELECTED_ITEM_COLOR);
+    for (const value of COLORS.ORDERED) {
+        $selectedItemColor.append(
+            makeOption({ text: getTranslation(value), value }),
+        );
+    }
+    $selectedItemColor.value = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+
     // Autoclose
     const $isAutocloseEnabled = document.getElementById(OPTIONS.IS_AUTOCLOSE_ENABLED);
     $isAutocloseEnabled.checked = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
@@ -95,6 +110,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Execution
         await Sync.set(OPTIONS.IS_AUTOMATIC_EXECUTION_ENABLED, $isAutomaticEnabled.checked);
         await Sync.set(OPTIONS.IS_EXECUTION_LOGGING_ENABLED, $isLoggingEnabled.checked);
+
+        // Appearance
+        await Sync.set(OPTIONS.UI_SELECTED_ITEM_COLOR, $selectedItemColor.value);
 
         // Autoclose
         await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, $isAutocloseEnabled.checked);

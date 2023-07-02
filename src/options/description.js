@@ -18,21 +18,6 @@ const makeDescription = (key, title, paragraphs) => new Description(key, title, 
 
 export const descriptions = [
     makeDescription(
-        OPTIONS.IS_AUTOCLOSE_ENABLED,
-        "Autoclose enabled",
-        [
-            "If enabled then popup will be closed automatically after usage.",
-            "It's possible to cancel closing by any key pressing."
-        ]
-    ),
-    makeDescription(
-        OPTIONS.AUTOCLOSE_TIME,
-        "Autoclose time",
-        [
-            "Popup autoclose time in seconds."
-        ]
-    ),
-    makeDescription(
         OPTIONS.IS_AUTOMATIC_EXECUTION_ENABLED,
         "Automatic execution enabled",
         [
@@ -46,6 +31,31 @@ export const descriptions = [
         [
             "Log extension actions to active page Console.",
             "It's useful for understanding of hard cases and unexpected behaviour."
+        ]
+    ),
+
+    makeDescription(
+        OPTIONS.UI_SELECTED_ITEM_COLOR,
+        "Selected item color",
+        [
+            "Color of selected item.",
+            "It's also used in different places on options page."
+        ]
+    ),
+
+    makeDescription(
+        OPTIONS.IS_AUTOCLOSE_ENABLED,
+        "Autoclose enabled",
+        [
+            "If enabled then popup will be closed automatically after usage.",
+            "It's possible to cancel closing by any key pressing."
+        ]
+    ),
+    makeDescription(
+        OPTIONS.AUTOCLOSE_TIME,
+        "Autoclose time",
+        [
+            "Popup autoclose time in seconds."
         ]
     )
 ];

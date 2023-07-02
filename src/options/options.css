@@ -9,7 +9,7 @@
 }
 
 .new::after {
-    content: "\2605";
+    content: "new";
     margin-left: 2px;
 }
 
