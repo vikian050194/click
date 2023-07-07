@@ -35,11 +35,25 @@ export const descriptions = [
     ),
 
     makeDescription(
+        OPTIONS.UI_FONT_SIZE,
+        "Font size",
+        [
+            "Popup font size in pixels."
+        ]
+    ),
+    makeDescription(
         OPTIONS.UI_SELECTED_ITEM_COLOR,
         "Selected item color",
         [
             "Color of selected item.",
             "It's also used in different places on options page."
+        ]
+    ),
+    makeDescription(
+        OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT,
+        "Selected item font weight",
+        [
+            "Font weight of selected item."
         ]
     ),
 

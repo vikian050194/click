@@ -62,7 +62,9 @@ export class UiOptions extends BasePOM {
     constructor(page) {
         super(page);
 
+        this.fontSize = new SelectOption(page, OPTIONS.UI_FONT_SIZE);
         this.selectedItemColor = new SelectOption(page, OPTIONS.UI_SELECTED_ITEM_COLOR);
+        this.selectedItemFontWeight = new SelectOption(page, OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
     }
 }
 

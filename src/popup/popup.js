@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isLoggingEnabled = await Sync.get(OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
 
     const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+    const weight = await Sync.get(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
+    const fontSize = await Sync.get(OPTIONS.UI_FONT_SIZE);
 
     const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
     const autocloseTimeSec = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
@@ -114,6 +116,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     $rootElement.style.setProperty("--selected-item-color", color);
+    $rootElement.style.setProperty("--selected-item-font-weight", weight);
+    $rootElement.style.setProperty("--font-size", `${fontSize}px`);
 
     // Render
     const render = () => {

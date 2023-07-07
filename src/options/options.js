@@ -3,7 +3,9 @@ import {
     Sync,
     OPTIONS,
     COLORS,
-    AUTOCLOSE
+    AUTOCLOSE,
+    FONTS,
+    WEIGHTS
 } from "../common/index.js";
 import { descriptions } from "./description.js";
 import { getTranslation } from "./translation.js";
@@ -84,6 +86,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     $isLoggingEnabled.checked = await Sync.get(OPTIONS.IS_EXECUTION_LOGGING_ENABLED);
 
     // Appearance
+    const $fontSize = document.getElementById(OPTIONS.UI_FONT_SIZE);
+    for (const value of FONTS.ORDERED) {
+        $fontSize.append(
+            makeOption({ text: value, value }),
+        );
+    }
+    $fontSize.value = await Sync.get(OPTIONS.UI_FONT_SIZE);
+
     const $selectedItemColor = document.getElementById(OPTIONS.UI_SELECTED_ITEM_COLOR);
     for (const value of COLORS.ORDERED) {
         $selectedItemColor.append(
@@ -91,6 +101,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
     }
     $selectedItemColor.value = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+
+    const $selectedItemFontWeight = document.getElementById(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
+    for (const value of WEIGHTS.ORDERED) {
+        $selectedItemFontWeight.append(
+            makeOption({ text: value, value }),
+        );
+    }
+    $selectedItemFontWeight.value = await Sync.get(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
 
     // Autoclose
     const $isAutocloseEnabled = document.getElementById(OPTIONS.IS_AUTOCLOSE_ENABLED);
@@ -112,7 +130,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         await Sync.set(OPTIONS.IS_EXECUTION_LOGGING_ENABLED, $isLoggingEnabled.checked);
 
         // Appearance
+        await Sync.set(OPTIONS.UI_FONT_SIZE, $fontSize.value);
         await Sync.set(OPTIONS.UI_SELECTED_ITEM_COLOR, $selectedItemColor.value);
+        await Sync.set(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT, $selectedItemFontWeight.value);
 
         // Autoclose
         await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, $isAutocloseEnabled.checked);
