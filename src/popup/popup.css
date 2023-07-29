@@ -3,11 +3,17 @@ body {
     font-size: var(--font-size);
 }
 
+.option {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .selected {
     color: var(--selected-item-color);
     font-weight: var(--selected-item-font-weight);
 }
 
-.empty {
-    color: gray;
+.arrow {
+    display: inline-flex;
 }

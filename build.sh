@@ -21,4 +21,5 @@ npm run lint
 npm run test
 npm run test:ui
 
+rm "click-$MANIFEST_VERSION.zip"
 zip -r "click-$MANIFEST_VERSION.zip" src

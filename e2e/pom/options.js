@@ -65,6 +65,7 @@ export class UiOptions extends BasePOM {
         this.fontSize = new SelectOption(page, OPTIONS.UI_FONT_SIZE);
         this.selectedItemColor = new SelectOption(page, OPTIONS.UI_SELECTED_ITEM_COLOR);
         this.selectedItemFontWeight = new SelectOption(page, OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
+        this.selectedItemArrow = new CheckboxOption(page, OPTIONS.UI_SELECTED_ITEM_ARROW);
     }
 }
 

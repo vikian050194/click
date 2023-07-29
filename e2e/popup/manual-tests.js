@@ -13,13 +13,55 @@ test.describe("Manual", () => {
         await options.goto();
 
         await options.execution.automatic.click();
-
+        await options.getPin(2).click();
+        await options.ui.selectedItemArrow.click();
         await options.getPin(3).click();
         await options.autoclose.enabled.click();
 
         await options.save();
 
         await context.pages()[0].close();
+    });
+
+    test("Arrow is visible", async ({ page, extensionId }) => {
+        // Arrange
+        const options = new OptionsPage(page, extensionId);
+        await options.goto();
+
+        await options.getPin(2).click();
+        await options.ui.selectedItemArrow.click();
+        await options.save();
+
+        const targets = new TargetsPage(page, extensionId);
+        await targets.goto();
+
+        await targets.create();
+        const row = targets.getRowPom(1);
+        await row.name.setValue("first click target");
+        await row.pattern.setValue("test.html");
+        await row.selector.setValue("#message");
+        await row.isAuto.click();
+        await targets.save();
+
+        const pom = new PopupPage(page, extensionId);
+
+        await page.addInitScript(() => {
+            chrome.tabs.query = () => { return [{ id: 1, url: "test.html" }]; };
+            window.log = [];
+            chrome.scripting.executeScript = (obj) => {
+                window.log.push(obj.args[0]);
+                return [{ result: 1 }];
+            };
+        });
+
+        await pom.goto();
+
+        // Act
+        await pom.enter();
+
+        // Assert
+        await expect(pom.selected).toHaveText("➤#1:first click target");
+        await expect(pom.nth(0)).toHaveText("➤#1:first click target");
     });
 
     test("No targets", async ({ page, extensionId }) => {

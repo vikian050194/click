@@ -56,6 +56,13 @@ export const descriptions = [
             "Font weight of selected item."
         ]
     ),
+    makeDescription(
+        OPTIONS.UI_SELECTED_ITEM_ARROW,
+        "Arrow pointer",
+        [
+            "Arrow appears in front of selected item."
+        ]
+    ),
 
     makeDescription(
         OPTIONS.IS_AUTOCLOSE_ENABLED,

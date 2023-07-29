@@ -35,12 +35,14 @@ test.describe("Sections", () => {
         await pom.ui.fontSize.hasValue("12");
         await pom.ui.selectedItemColor.hasValue("#EC4339");
         await pom.ui.selectedItemFontWeight.hasValue("bold");
+        await pom.ui.selectedItemArrow.isChecked(true);
 
         // Act
         await pom.getPin(2).click();
         await pom.ui.fontSize.setValue("8");
         await pom.ui.selectedItemColor.setValue("#00A0DC");
         await pom.ui.selectedItemFontWeight.setValue("normal");
+        await pom.ui.selectedItemArrow.click();
 
         await pom.save();
         await pom.reload();
@@ -49,6 +51,7 @@ test.describe("Sections", () => {
         await pom.ui.fontSize.hasValue("8");
         await pom.ui.selectedItemColor.hasValue("#00A0DC");
         await pom.ui.selectedItemFontWeight.hasValue("normal");
+        await pom.ui.selectedItemArrow.isChecked(false);
     });
 
     test("Autoclose", async ({ page }) => {
