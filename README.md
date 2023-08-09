@@ -13,9 +13,11 @@
 
 **click** is Google Chrome extension for clicking on anything without clicking!
 
+You can take a look at [list of questions and problems](./QA.md) that I faced during development.
+
 ## Motivation
 
-It's my third Chrome extension. And it would not be nice to mix responsibilities and add such functionality into [warp][warp-url] and [track][track-url]. You can take a look at [list of questions and problems](./QA.md) that I faced during development.
+Unfortunately sometimes UX is not brilliant and it's not possible to improve it because it's just some external website. But let's try to improve it a bit via clicking (semi)automation  if we are speaking only about weird and hard to reach UI elements. Only one particular case. But it's relatively frequent and generic.
 
 ## Requirements
 
@@ -56,12 +58,16 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 
 ## Tests
 
-`mocha` is used for unit testing and `c8` for coverage
-`playwright` is used for e2e testing
+### Packages
 
-`npm test` - run unit tests
-`npm run cover` - run code coverage
-`npm run test:ui` - run e2e tests
+- `mocha` is used for unit testing and `c8` for coverage
+- `playwright` is used for e2e testing
+
+### How to run
+
+- `npm test` - run unit tests
+- `npm run cover` - run code coverage
+- `npm run test:ui` - run e2e tests
 
 [warp-url]: https://github.com/vikian050194/warp
 [track-url]: https://github.com/vikian050194/track
