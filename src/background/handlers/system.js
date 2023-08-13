@@ -21,18 +21,42 @@ const updateDefaultValues = async () => {
     }
 };
 
-const updateMenu = () => {
-    chrome.contextMenus.create({
+const updateMenu = async () => {
+    await chrome.contextMenus.create({
         id: MENU.TARGETS,
         title: "Targets",
         contexts: ["action"],
         type: "normal",
         enabled: true
     });
+
+    await chrome.contextMenus.create({
+        id: MENU.CHANGELOG,
+        title: "Changelog",
+        contexts: ["action"],
+        type: "normal",
+        enabled: true
+    });
 };
 
-export const onInstall = async () => {
-    updateMenu();
+const showChangelog = async (reason) => {
+    const show = await Sync.get(OPTIONS.CHANGELOG_SHOW);
+
+    if (!show) {
+        return;
+    }
+
+    if (reason === "install" || reason === "update") {
+        await chrome.tabs.create({
+            url: `changelog/changelog.html?reason=${reason}`
+        });
+    }
+};
+
+export const onInstall = async ({ reason }) => {
+    await updateMenu();
 
     await updateDefaultValues();
+
+    await showChangelog(reason);
 };

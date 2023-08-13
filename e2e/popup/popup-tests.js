@@ -8,14 +8,16 @@ test.describe("Popup", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout);
 
+        // TODO handle changelog automatic opening somehow else
+        await context.pages()[0].close();
+        await context.pages()[1].close();
+
         const options = new OptionsPage(page, extensionId);
         await options.goto();
 
         await options.getPin(3).click();
         await options.autoclose.enabled.click();
         await options.save();
-
-        await context.pages()[0].close();
     });
 
     test("Logging is disabled", async ({ page, extensionId }) => {

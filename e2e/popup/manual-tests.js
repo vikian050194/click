@@ -9,6 +9,10 @@ test.describe("Manual", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout);
 
+        // TODO handle changelog automatic opening somehow else
+        await context.pages()[0].close();
+        await context.pages()[1].close();
+
         const options = new OptionsPage(page, extensionId);
         await options.goto();
 
@@ -19,8 +23,6 @@ test.describe("Manual", () => {
         await options.autoclose.enabled.click();
 
         await options.save();
-
-        await context.pages()[0].close();
     });
 
     test("Arrow is visible", async ({ page, extensionId }) => {

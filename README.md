@@ -31,11 +31,12 @@ Just go [here][store-version-url] and click "Add to Chrome"
 
 **From sources**
 
-1. Clone repo
-2. Open Chrome and navigate [here](chrome://extensions/)
-3. Enable `Developer mode` via toggle
-4. `Load unpacked` and select `src` directory of the cloned repo
-5. Reboot Chrome - probably is not required step
+1. Clone repo `git clone https://github.com/vikian050194/click.git`
+2. Create and activate Python virtual environment
+3. Install dependencies `pip install -r requirements.txt` and run `python mdConverter.py`
+4. Open Chrome and navigate [here](chrome://extensions/)
+5. Enable `Developer mode` via toggle
+6. `Load unpacked` and select `src` directory of the cloned repo
 
 ## Usage
 
@@ -49,12 +50,34 @@ Extension has few options.
 
 You can [setup your own shortcut for activation](chrome://extensions/shortcuts), but default one is `Alt+C` or `Command+C`.
 
-**Popup autoclose**
+**Execution**
+
+| Name | Description |
+| :--- | :--- |
+| Automatic execution enabled | Automatic execution on extension activation: if there is only one matched automatic target, then it will be executed |
+| Execution logging enabled | Log extension actions to active page Console |
+
+**Appearance**
+
+| Name | Description |
+| :--- | :--- |
+| Font size | Popup font size in pixels |
+| Selected item color | Color of selected item in results list |
+| Selected item font weight | Font weight of selected item in results list |
+| Arrow pointer | Arrow appears in front of selected item |
+
+**Autoclosing**
 
 | Name | Description |
 | :--- | :--- |
 | Autoclose enabled | Is popup autoclose enabled |
 | Autoclose time | Popup autoclose time in seconds |
+
+**Changelog**
+
+| Name | Description |
+| :--- | :--- |
+| Show on update | If enabled then changelog page will be shown automatically on extension version update |
 
 ## Tests
 

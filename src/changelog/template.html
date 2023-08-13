@@ -2,21 +2,18 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="targets.css">
-    <script src="targets.js" type="module"></script>
-    <title>click: targets</title>
+    <link rel="stylesheet" href="changelog.css">
+    <script src="changelog.js" type="module"></script>
+    <title>click: changelog</title>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Targets</h1>
+            <h1>Changelog</h1>
         </header>
         <main>
-            <div id="root"></div>
-            <button id="save" class="action">Save</button>
-            <button id="create" class="action">Create</button>
-            <button id="reset" class="action">Reset</button>
+            {{content}}
         </main>
         <footer>
             <span>
@@ -31,6 +28,14 @@
                 <a href="/changelog/changelog.html">changelog</a>
             </span>
         </footer>
+    </div>
+    <div class="modal" id="modal-one">
+        <div class="modal-bg modal-exit"></div>
+        <div class="modal-container">
+            <h1></h1>
+            <div class="description"></div>
+            <button class="modal-close modal-exit">Close</button>
+        </div>
     </div>
 </body>
 

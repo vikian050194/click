@@ -8,3 +8,5 @@ export const UI_FONT_SIZE = "ui-font-size";
 
 export const IS_AUTOCLOSE_ENABLED = "is-autoclose-enabled";
 export const AUTOCLOSE_TIME = "autoclose-time";
+
+export const CHANGELOG_SHOW = "changelog-show";
