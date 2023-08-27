@@ -15,6 +15,21 @@ export class BasePOM {
     }
 }
 
+class Navigation extends BasePOM {
+    /**
+ * @param {import('@playwright/test').Page} page
+ */
+    constructor(page) {
+        super(page);
+
+        const container = page.locator("footer > div");
+
+        this.options = container.locator("span", { hasText: "options" });
+        this.targets = container.locator("span", { hasText: "targets" });
+        this.changelog = container.locator("span", { hasText: "changelog" });
+    }
+}
+
 export class BasePage extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
@@ -23,6 +38,8 @@ export class BasePage extends BasePOM {
         super(page);
 
         this.extensionId = extensionId;
+        this.navigation = new Navigation(page);
+        this.version = page.locator("#version");
     }
 
     async goto(name, params = {}) {
@@ -42,5 +59,10 @@ export class BasePage extends BasePOM {
 
     async close() {
         await this.page.close();
+    }
+
+    async checkVersion() {
+        const text = await this.version.textContent();
+        await this.expect(text).toMatch(/^v1\.\d+\.\d$/);
     }
 }

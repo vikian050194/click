@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2023-08-27
+
+### Added
+
+- Version on all pages
+
 ## [1.5.0] - 2023-08-13
 
 ### Added
@@ -88,7 +94,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use regular expression for URL matching
 - Configure popup autoclosing and autoclosing time
 
-[Unreleased]: https://github.com/vikian050194/click/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/vikian050194/click/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/vikian050194/click/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/vikian050194/click/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/vikian050194/click/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/vikian050194/click/compare/v1.2.0...v1.3.0

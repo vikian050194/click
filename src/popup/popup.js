@@ -4,9 +4,9 @@ import {
     OPTIONS,
     TARGETS,
     funcs,
-    dom
+    dom,
+    match
 } from "../common/index.js";
-import { match } from "../common/match.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     // Get options

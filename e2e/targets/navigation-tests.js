@@ -15,7 +15,8 @@ test.describe("Navigation", () => {
 
     test("Header", async ({ page }) => {
         // Arrange
-        const header = page.locator("h1");
+        // TODO extract header locator
+        const header = page.locator("header > h1");
 
         // Assert
         await expect(header).toHaveText("Targets");
@@ -23,10 +24,10 @@ test.describe("Navigation", () => {
 
     test("Options", async ({ page }) => {
         // Arrange
-        const link = page.locator("footer > span", { hasText: "options" });
+        const pom = new TargetsPage(page);
 
         // Act
-        await link.click();
+        await pom.navigation.options.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("options/options.html"));
@@ -34,10 +35,10 @@ test.describe("Navigation", () => {
 
     test("Targets", async ({ page }) => {
         // Arrange
-        const link = page.locator("footer > span", { hasText: "targets" });
+        const pom = new TargetsPage(page);
 
         // Act
-        await link.click();
+        await pom.navigation.targets.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("targets/targets.html"));
@@ -45,12 +46,20 @@ test.describe("Navigation", () => {
 
     test("Changelog", async ({ page }) => {
         // Arrange
-        const link = page.locator("footer > span", { hasText: "changelog" });
+        const pom = new TargetsPage(page);
 
         // Act
-        await link.click();
+        await pom.navigation.changelog.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("changelog/changelog.html"));
+    });
+
+    test("Version", async ({ page }) => {
+        // Arrange
+        const pom = new TargetsPage(page);
+
+        // Assert
+        await pom.checkVersion();
     });
 });

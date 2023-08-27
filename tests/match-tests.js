@@ -1,6 +1,6 @@
 import assert from "node:assert";
 
-import { match } from "../src/common/match.js";
+import { match } from "../src/common/index.js";
 
 describe("Match", function () {
     it("line is matched", () => {

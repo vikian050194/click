@@ -23,10 +23,10 @@ test.describe("Navigation", () => {
 
     test("Options", async ({ page }) => {
         // Arrange
-        const link = page.locator("footer > span", { hasText: "options" });
+        const pom = new OptionsPage(page);
 
         // Act
-        await link.click();
+        await pom.navigation.options.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("options/options.html"));
@@ -34,10 +34,10 @@ test.describe("Navigation", () => {
 
     test("Targets", async ({ page }) => {
         // Arrange
-        const link = page.locator("footer > span", { hasText: "targets" });
+        const pom = new OptionsPage(page);
 
         // Act
-        await link.click();
+        await pom.navigation.targets.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("targets/targets.html"));
@@ -45,12 +45,20 @@ test.describe("Navigation", () => {
 
     test("Changelog", async ({ page }) => {
         // Arrange
-        const link = page.locator("footer > span", { hasText: "changelog" });
+        const pom = new OptionsPage(page);
 
         // Act
-        await link.click();
+        await pom.navigation.changelog.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("changelog/changelog.html"));
+    });
+
+    test("Version", async ({ page }) => {
+        // Arrange
+        const pom = new OptionsPage(page);
+
+        // Assert
+        await pom.checkVersion();
     });
 });

@@ -60,10 +60,9 @@ test.describe("Misc", () => {
         const page = context.pages()[1];
         const pom = new ChangelogPage(page);
         await pom.modal.close();
-        const link = page.locator("footer > span", { hasText: "options" });
 
         // Act
-        await link.click();
+        await pom.navigation.options.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("options/options.html"));
@@ -74,10 +73,9 @@ test.describe("Misc", () => {
         const page = context.pages()[1];
         const pom = new ChangelogPage(page);
         await pom.modal.close();
-        const link = page.locator("footer > span", { hasText: "targets" });
 
         // Act
-        await link.click();
+        await pom.navigation.targets.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("targets/targets.html"));
@@ -88,12 +86,20 @@ test.describe("Misc", () => {
         const page = context.pages()[1];
         const pom = new ChangelogPage(page);
         await pom.modal.close();
-        const link = page.locator("footer > span", { hasText: "changelog" });
 
         // Act
-        await link.click();
+        await pom.navigation.changelog.click();
 
         // Assert
         await expect(page).toHaveURL(new RegExp("changelog/changelog.html"));
+    });
+
+    test("Version", async ({ context }) => {
+        // Arrange
+        const page = context.pages()[1];
+        const pom = new ChangelogPage(page);
+
+        // Assert
+        await pom.checkVersion();
     });
 });
