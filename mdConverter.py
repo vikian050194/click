@@ -1,20 +1,30 @@
 import markdown
 
 
-placeholder = "{{content}}"
+PLACEHOLDER = "{{content}}"
 
-with open("src/changelog/template.html", "r") as f:
-    template = f.read()
+def md_to_html(name: str, start_from_line: int):
+    source = f"{name.upper()}.md"
+    template_path = f"src/{name}/template.html"
+    output_path = f"src/{name}/{name}.html"
 
-with open("CHANGELOG.md", "r") as f:
-    sourceMd= f.readlines()
+    with open(template_path, "r") as f:
+        template = f.read()
 
-sourceMd = sourceMd[9:]
+    with open(source, "r") as f:
+        sourceMd= f.readlines()
 
-sourceMd = "\n".join(sourceMd)
+    sourceMd = sourceMd[start_from_line:]
+    sourceMd = "\n".join(sourceMd)
+    htmlContent = markdown.markdown(sourceMd)
 
-htmlContent = markdown.markdown(sourceMd)
+    with open(output_path, "w") as f:
+        result = template.replace(PLACEHOLDER, htmlContent)
+        f.write(result)
 
-with open("src/changelog/changelog.html", "w") as f:
-    result = template.replace(placeholder, htmlContent)
-    f.write(result)
+files = [
+    ("changelog", 9)
+]
+
+for name, start in files:
+    md_to_html(name, start)

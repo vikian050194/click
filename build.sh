@@ -17,6 +17,9 @@ fi
 
 set -e
 
+source venv/bin/activate
+python mdConverter.py
+
 npm run lint
 npm run test
 npm run test:ui

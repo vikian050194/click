@@ -3,7 +3,8 @@ import {
     Target,
     TARGETS,
     dom,
-    getVersion
+    getVersion,
+    fs
 } from "../common/index.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -48,6 +49,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     $resetButton.addEventListener("click", async () => {
         await Local.set(TARGETS.TARGETS, []);
         location.reload();
+    });
+
+    const $loadFileButton = document.getElementById("file-load");
+    $loadFileButton.addEventListener("click", async () => {
+        const data = await fs.loadFromFile(TARGETS.TARGETS);
+        await Local.set(TARGETS.TARGETS, data);
+        location.reload();
+    });
+
+    const $saveFileButton = document.getElementById("file-save");
+    $saveFileButton.addEventListener("click", async () => {
+        const data = await Local.get(TARGETS.TARGETS);
+        await fs.saveToFile(TARGETS.TARGETS, data);
     });
 
     // Version
