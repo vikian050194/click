@@ -15,6 +15,8 @@
 
 You can take a look at [list of questions and problems](./QA.md) that I faced during development.
 
+By the way, there is [todo list](./TODO.md).
+
 ## Motivation
 
 Unfortunately sometimes UX is not brilliant and it's not possible to improve it because it's just some external website. But let's try to improve it a bit via clicking (semi)automation  if we are speaking only about weird and hard to reach UI elements. Only one particular case. But it's relatively frequent and generic.
