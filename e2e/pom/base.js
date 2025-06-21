@@ -9,10 +9,6 @@ export class BasePOM {
 
         this.expect = expect;
     }
-
-    async goto(name) {
-        await this.page.goto(`chrome-extension://${this.extensionId}/${name}/${name}.html`);
-    }
 }
 
 class Navigation extends BasePOM {
